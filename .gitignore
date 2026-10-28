@@ -1,0 +1,22 @@
+# Local settings and credentials
+.env
+.env.*
+!.env.example
+.codex/
+.agents/
+.aws/
+*.pem
+*.key
+
+# Dependencies and build output
+node_modules/
+dist/
+build/
+coverage/
+
+# Local caches and temporary output
+*.log
+*.tmp
+.DS_Store
+Thumbs.db
+.idea/
