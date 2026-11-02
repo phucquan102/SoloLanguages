@@ -38,6 +38,12 @@ Tiến độ demo được lưu trong localStorage theo tài khoản trên trìn
 
 ## Luồng chính
 
+**Các trang học tập đã có mẫu ở cả hai khóa:** Cây kỹ năng, Sổ từ vựng, Ôn tập, Sổ lỗi, Kiểm tra, Tiến độ và Cài đặt. Tiếng Trung có Pinyin và luyện viết ngay trong thẻ từ/lượt ôn; cả hai khóa có nghe phát âm từ/câu và nghe chậm. Cài đặt âm thanh ở trang Cài đặt hoặc thanh âm thanh tại Sổ từ vựng. Âm thanh dùng giọng đọc trình duyệt nếu có, chưa phải bộ audio chuẩn của khóa học.
+
+**Trợ lý chibi:** Vào **Cài đặt → Trợ lý chibi của bạn** để chọn Naruto, Sasuke, Sakura, Luffy, Gojo hoặc Anya, đổi góc đứng, bật/tắt hoạt ảnh và gợi ý tự động. Bấm nhân vật ở góc màn hình để xem mẹo theo trang hoặc mở trợ lý hội thoại. Ảnh được tạo bằng imagegen và lưu tại `mockup/assets/companions/`; prompt và mô tả atlas nằm trong README của thư mục đó.
+
+**Cách học hiện tại:** Tổng quan hiển thị khung nhiệm vụ chính rộng. Người học hoàn thành đầy đủ theo thứ tự lộ trình rồi làm Daily Test; nhiệm vụ phụ và ôn tập là tùy chọn. Đã bỏ chọn nhịp và khái niệm phiên học. Trợ lý Người đồng hành hỗ trợ giải thích và hướng dẫn, không thay đổi số nhiệm vụ.
+
 1. Nhận thông điệp hệ thống và đồng ý tiếp nhận.
 2. Tạo tài khoản email hoặc đăng nhập; Google có luồng demo riêng.
 3. Đặt tên người dùng.
