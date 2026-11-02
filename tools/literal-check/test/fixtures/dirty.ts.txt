@@ -1,0 +1,9 @@
+export const exam = 'IELTS';
+const level = { framework: "hsk" };
+const locale = 'vi';
+const tag = `zh-Hans`;
+const word = '中文';
+const greeting = '안녕';
+// lang-literal-allow:
+const noReason = 'en';
+const kana = 1;

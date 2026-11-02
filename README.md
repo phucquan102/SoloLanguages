@@ -6,7 +6,7 @@ Hệ thống học IELTS theo lộ trình cá nhân, từ Level 0 đến mục t
 
 ```text
 SoloLanguages/
-├── mockup/                 # Bản HTML tương tác, chạy độc lập
+├── mockup/                 # Bản HTML tương tác, chạy độc lập; chỉ để đối chiếu giao diện
 │   ├── index.html
 │   ├── onboarding.css
 │   ├── onboarding.js
@@ -15,8 +15,32 @@ SoloLanguages/
 │   ├── admin.html          # Không gian quản trị độc lập
 │   ├── admin.css
 │   └── admin.js
+├── apps/                   # Dự kiến, chưa tồn tại: web/, api/
+├── packages/
+│   ├── language-sdk/       # Hiện có: src/contract/, src/registry/, src/testing/
+│   ├── core/               # Dự kiến
+│   ├── db/                 # Dự kiến
+│   ├── i18n/               # Dự kiến
+│   ├── ui/                 # Dự kiến
+│   └── feature-*/          # Dự kiến: capability dùng chung giữa các ngôn ngữ
+├── languages/
+│   ├── _fixture/           # Hiện có: module qaa để kiểm thử; không discover ở production
+│   ├── _template/          # Dự kiến
+│   └── en/, zh/, ja/        # Dự kiến: module ngôn ngữ thật
+├── tools/
+│   ├── literal-check/      # Hiện có: bin/, src/, config/, test/
+│   └── create-language/    # Dự kiến
 ├── docs/
-│   └── product-notes.md    # Luồng sử dụng, quy tắc và phạm vi đã chốt
+│   ├── product-notes.md    # Luồng sử dụng, quy tắc và phạm vi đã chốt
+│   ├── adr/                # Quyết định kiến trúc (ADR)
+│   ├── architecture/       # Tài liệu kiến trúc, hợp đồng module ngôn ngữ
+│   └── research/           # Tư liệu nghiên cứu
+├── package.json            # Monorepo npm workspaces
+├── package-lock.json
+├── tsconfig.base.json
+├── vitest.config.ts
+├── .editorconfig
+├── .nvmrc
 ├── .gitattributes
 ├── .gitignore
 └── README.md
@@ -57,6 +81,33 @@ Tiến độ demo được lưu trong localStorage theo tài khoản trên trìn
 
 ## Phát triển ứng dụng sau này
 
-Giữ `mockup/` làm tài liệu đối chiếu. Khi chọn công nghệ, tạo mã ứng dụng riêng tại thư mục gốc, chẳng hạn `src/` cho một ứng dụng đơn hoặc `apps/web/` và `apps/api/` nếu cần tách frontend/backend. Chưa tạo framework hoặc thư mục ứng dụng rỗng trước khi chốt kiến trúc.
+Giữ `mockup/` làm tài liệu đối chiếu giao diện; không sửa và không import mã từ đó vào mã mới. Mã ứng dụng nằm trong monorepo npm workspaces ở thư mục gốc, gồm lõi dùng chung và các module ngôn ngữ độc lập.
+
+Đọc theo thứ tự:
+
+1. [ADR 0001: Monorepo, lõi dùng chung và module ngôn ngữ](docs/adr/0001-monorepo-language-modules.md): vì sao tách lõi và module, quy tắc "không literal ngôn ngữ trong lõi".
+2. [ADR 0002: Toolchain TypeScript, Vitest, Zod và `tsconfig`](docs/adr/0002-toolchain-tsconfig.md): phiên bản ghim và cấu hình.
+3. [Hợp đồng module ngôn ngữ](docs/architecture/language-module-contract.md): giao diện `LanguageModule`, vòng đời registry, mã lỗi, bật/tắt module và ví dụ thêm tiếng Nhật (JLPT).
+4. [Cấu trúc repository](docs/architecture/repository-structure.md): workspace, quy ước tên, bố trí test và cách thêm module, tool, shared feature.
+5. [Danh mục ADR](docs/adr/README.md): mẫu và quy ước khi thêm quyết định mới.
+
+### Phạm vi hiện có (Phase 1)
+
+SDK module ngôn ngữ, registry, contract suite dùng lại, module mẫu `languages/_fixture` và công cụ `tools/literal-check/bin/check-no-language-literals.mjs`. Chưa có ứng dụng web, API, cơ sở dữ liệu hay module ngôn ngữ thật.
+
+Dự kiến ở các phase sau (chưa tồn tại): `packages/core`, `packages/i18n`, `packages/db`, `packages/ui`, `packages/feature-*`, `apps/web` (React + Vite), `apps/api` (NestJS), PostgreSQL, `languages/en`, `languages/zh`, `languages/ja`, `languages/_template` và `tools/create-language`. Thư mục dự kiến chỉ được tạo khi bắt đầu phase tương ứng.
+
+### Chạy lệnh
+
+Cần Node 24 (xem `.nvmrc`) và npm. Không cần cài công cụ toàn cục; mọi công cụ đến từ `npm install`.
+
+```bash
+npm install       # cài toàn bộ workspace
+npm test          # chạy Vitest: unit test và contract test
+npm run check:literals # kiểm tra literal ngôn ngữ trong lõi và SDK
+npm run check     # check:literals, typecheck rồi test
+```
+
+`check:literals` dùng TypeScript compiler API; tên mã ngôn ngữ bị cắm cờ tại key, method, accessor, enum member, import/export specifier, shorthand destructuring và property access (`o.en`), ngoài các string và thuật ngữ trong cấu hình. Biến hoặc parameter thuần không bị cắm cờ chỉ vì tên mã ngôn ngữ. Exit code: `0` sạch, `1` có finding, `2` có scan error. Xem [quy tắc literal checker](docs/architecture/repository-structure.md#quy-tắc-literal-checker).
 
 Xem [ghi chú sản phẩm](docs/product-notes.md) để tiếp tục phân tích và triển khai.

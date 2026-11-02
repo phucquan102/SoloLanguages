@@ -1,0 +1,32 @@
+{
+  "roots": ["packages/core/src", "packages/language-sdk/src"],
+  "extensions": [".ts", ".tsx", ".mts", ".cts", ".js", ".jsx", ".mjs", ".cjs"],
+  "ignoreDirs": ["node_modules", "dist", "coverage"],
+  "allowDirective": "lang-literal-allow:",
+  "rules": [
+    {
+      "id": "framework-or-script-term",
+      "pattern": "(?<![a-z])(?:hsk|ielts|cefr|jlpt|topik|toefl|pinyin|hanzi|kanji|kana|hiragana|katakana|furigana|romaji|hangul)(?![a-z])",
+      "flags": "gi",
+      "camelWords": true
+    },
+    {
+      "id": "quoted-language-code",
+      "pattern": "(['\"`])(?:en|zh|ja|ko|vi|fr|de|es|sr)(?:[-_](?<script>[a-z]{4}))?(?:[-_](?:[a-z]{2}|[0-9]{3}))?(?:[-_][ux](?:[-_][a-z0-9]{2,8})+)*(?:\\1|[-_](?=\\$\\{))",
+      "flags": "gi",
+      "scope": "literal",
+      "knownScript": true
+    },
+    {
+      "id": "unquoted-language-code",
+      "pattern": "(?<![\\w$])(?:en|zh|ja|ko|vi|fr|de|es|sr)\\s*:",
+      "flags": "gi",
+      "scope": "code"
+    },
+    {
+      "id": "cjk-or-hangul-char",
+      "pattern": "[\\p{Script=Han}\\p{Script=Hiragana}\\p{Script=Katakana}\\p{Script=Hangul}\\p{Script=Bopomofo}]",
+      "flags": "gu"
+    }
+  ]
+}

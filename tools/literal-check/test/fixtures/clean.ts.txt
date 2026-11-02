@@ -1,0 +1,10 @@
+export const english = 'English';
+const kanban = ['todo', 'done'];
+const editor = "vim";
+const code = 'eng';
+const flag = 'eng_US';
+const viewport = 'viewport';
+const accent = 'café';
+export const exam = 'IELTS'; // lang-literal-allow: documented example
+// lang-literal-allow: sample locale for docs
+const locale = 'vi';
