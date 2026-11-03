@@ -1,0 +1,18 @@
+{
+  "name": "@solo/content-schema",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./testing": "./src/testing/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@solo/language-sdk": "0.1.0",
+    "zod": "4.6.7"
+  }
+}

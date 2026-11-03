@@ -33,7 +33,9 @@ describe('static ISO 15924 script codes', () => {
 
 describe('default configuration', () => {
   it('preserves default roots, extensions and rule order', () => {
-    expect(config.roots).toEqual(['packages/core/src', 'packages/language-sdk/src']);
+    expect(config.roots).toEqual([
+      'packages/core/src', 'packages/language-sdk/src', 'packages/content-schema/src',
+    ]);
     expect(config.extensions).toEqual(['.ts', '.tsx', '.mts', '.cts', '.js', '.jsx', '.mjs', '.cjs']);
     expect(config.rules.map(({ id }) => id)).toEqual([
       'framework-or-script-term', 'quoted-language-code', 'unquoted-language-code', 'cjk-or-hangul-char',

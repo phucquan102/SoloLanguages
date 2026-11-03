@@ -1,5 +1,5 @@
 {
-  "roots": ["packages/core/src", "packages/language-sdk/src"],
+  "roots": ["packages/core/src", "packages/language-sdk/src", "packages/content-schema/src"],
   "extensions": [".ts", ".tsx", ".mts", ".cts", ".js", ".jsx", ".mjs", ".cjs"],
   "ignoreDirs": ["node_modules", "dist", "coverage"],
   "allowDirective": "lang-literal-allow:",
